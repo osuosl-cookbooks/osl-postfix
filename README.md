@@ -1,19 +1,15 @@
 osl-postfix Cookbook
 ====================
-TODO: Enter the cookbook description here.
-
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+This cookbook is a wrapper around [postfix](https://github.com/chef-cookbooks/postfix).
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any
-requirements this cookbook has on platforms, libraries, other cookbooks,
-packages, operating systems, etc.
 
-e.g.
-#### packages
-- `toaster` - osl-postfix needs toaster to brown your bagel.
+#### Platforms
+- CentOS 7
+
+#### Cookbooks
+- [`postfix`](https://github.com/chef-cookbooks/postfix) - the upstream cookbook that `osl-postfix` wraps
 
 Attributes
 ----------

@@ -1,0 +1,11 @@
+name             'osl-postfix'
+maintainer       'Oregon State University'
+maintainer_email 'chef@osuosl.org'
+license          'apachev2'
+issues_url       'https://github.com/osuosl-cookbooks/osl-postfix/issues'
+source_url       'https://github.com/osuosl-cookbooks/osl-postfix'
+description      'Installs/Configures osl-postfix'
+long_description 'Installs/Configures osl-postfix'
+version          '0.1.0'
+
+supports         'centos', '~> 7.0'

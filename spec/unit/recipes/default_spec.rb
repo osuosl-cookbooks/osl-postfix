@@ -6,9 +6,9 @@ describe 'osl-postfix::default' do
       cached(:chef_run) do
         ChefSpec::SoloRunner.new(p).converge(described_recipe)
       end
-      before do
-        stub_command('/usr/bin/test /etc/alternatives/mta -ef /usr/sbin/sendmail.postfix')
-      end
+
+      include_context 'common_stubs'
+
       it 'converges successfully' do
         expect { chef_run }.to_not raise_error
       end

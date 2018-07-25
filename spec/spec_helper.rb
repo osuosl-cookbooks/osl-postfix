@@ -27,3 +27,9 @@ ALL_PLATFORMS = [
 RSpec.configure do |config|
   config.log_level = :fatal
 end
+
+shared_context 'common_stubs' do
+  before do
+    stub_command('/usr/bin/test /etc/alternatives/mta -ef /usr/sbin/sendmail.postfix')
+  end
+end

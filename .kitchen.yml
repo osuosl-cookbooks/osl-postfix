@@ -3,3 +3,6 @@ suites:
   - name: default
     run_list:
       - recipe[osl-postfix::default]
+  - name: server
+    run_list:
+      - recipe[osl-postfix::server]

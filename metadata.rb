@@ -9,6 +9,6 @@ description      'Installs/Configures osl-postfix'
 long_description 'Installs/Configures osl-postfix'
 version          '0.1.0'
 
-depends          'postfix'
+depends          'postfix', '~> 5.3.0'
 
 supports         'centos', '~> 7.0'

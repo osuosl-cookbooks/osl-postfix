@@ -15,3 +15,8 @@ describe file '/etc/postfix/main.cf' do
     its(:content) { should match(line) }
   end
 end
+
+describe file '/etc/ssl/certs/ca-certificates.crt' do
+  it { should be_file }   if os[:family] == 'debian'
+  it { should_not exist } if os[:family] != 'debian'
+end

@@ -17,20 +17,9 @@
 # limitations under the License.
 
 node.default['postfix']['mail_type'] = 'client'
-node.default['postfix']['main']['myorigin'] = '$mydomain'
-node.default['postfix']['main']['smtpd_use_tls'] = 'no'
 
-case node['network']['default_gateway']
-# We must use the submission port on these networks
-when '10.162.136.1', '128.193.126.193', '148.100.110.1'
-  node.default['postfix']['main']['relayhost'] = '[smtp.osuosl.org]:587'
-  node.default['postfix']['main']['smtp_use_tls'] = 'yes'
-  if node['platform_family'] == 'debian'
-    node.default['postfix']['main']['smtp_tls_CAfile'] = '/etc/ssl/certs/ca-certificates.crt'
-  end
-else
-  node.default['postfix']['main']['relayhost'] = '[smtp.osuosl.org]:25'
-  node.default['postfix']['main']['smtp_use_tls'] = 'no'
+node['osl-postfix']['main'].each do |key, value|
+  node.default['postfix']['main'][key] = value
 end
 
 include_recipe 'postfix'

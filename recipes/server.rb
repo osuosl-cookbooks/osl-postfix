@@ -16,4 +16,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+node['osl-postfix']['main'].each do |key, value|
+  node.default['postfix']['main'][key] = value
+end
+
 include_recipe 'postfix::server'

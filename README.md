@@ -13,10 +13,6 @@ Requirements
 
 Attributes
 ----------
-TODO: List your cookbook attributes here.
-
-e.g.
-#### osl-postfix::default
 <table>
   <tr>
     <th>Key</th>
@@ -25,29 +21,22 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['osl-postfix']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td><tt>['osl-postfix']['main']</tt></td>
+    <td>Hash</td>
+    <td>Set attributes for <tt>['postfix']['main']</tt> here and they'll be set in <tt>osl-postfix::attributes</tt></td>
+    <td><tt>{}</tt></td>
   </tr>
 </table>
 
 Usage
 -----
 #### osl-postfix::default
-TODO: Write usage instructions for each cookbook.
+Include `osl-postfix::default` for hosts that only need to be able to send mail (functioning as a
+postfix client).
 
-e.g.
-Just include `osl-postfix` in your node's `run_list`:
-
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[osl-postfix]"
-  ]
-}
-```
+#### osl-postfix::server
+Include `osl-postfix::server` for hosts that will send and receive mail (functioning as a postfix
+server).
 
 Contributing
 ------------

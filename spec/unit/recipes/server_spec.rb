@@ -13,8 +13,12 @@ describe 'osl-postfix::server' do
         expect { chef_run }.to_not raise_error
       end
 
-      it do
-        expect(chef_run).to include_recipe 'postfix::server'
+      %w(
+        postfix::server
+      ).each do |recipe|
+        it do
+          expect(chef_run).to include_recipe recipe
+        end
       end
 
       it do

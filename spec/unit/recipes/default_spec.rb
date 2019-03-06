@@ -45,8 +45,12 @@ describe 'osl-postfix::default' do
           end
         end
       end
-      it do
-        expect(chef_run).to include_recipe 'postfix'
+      %w(
+        postfix::default
+      ).each do |recipe|
+        it do
+          expect(chef_run).to include_recipe recipe
+        end
       end
     end
   end

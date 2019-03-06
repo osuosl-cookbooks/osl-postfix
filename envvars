@@ -1,0 +1,4 @@
+cookbook=osl-postfix
+version=1.0.0
+envs=*
+pr_link=https://github.com/osuosl-cookbooks/osl-postfix/pull/2

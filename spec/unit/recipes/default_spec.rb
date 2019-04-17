@@ -38,7 +38,8 @@ describe 'osl-postfix::default' do
           end
         end
         it do
-          if p == DEBIAN_8 || p == DEBIAN_9
+          case p
+          when DEBIAN_8, DEBIAN_9
             expect(chef_run).to render_file('/etc/postfix/main.cf').with_content('smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt')
           else
             expect(chef_run).to_not render_file('/etc/postfix/main.cf').with_content('smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt')

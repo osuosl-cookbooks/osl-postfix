@@ -20,4 +20,5 @@ node['osl-postfix']['main'].each do |key, value|
   node.default['postfix']['main'][key] = value
 end
 
+include_recipe 'firewall::smtp'
 include_recipe 'postfix::server'

@@ -14,6 +14,7 @@ describe 'osl-postfix::server' do
       end
 
       %w(
+        firewall::smtp
         postfix::server
       ).each do |recipe|
         it do

@@ -7,7 +7,7 @@ issues_url       'https://github.com/osuosl-cookbooks/osl-postfix/issues'
 source_url       'https://github.com/osuosl-cookbooks/osl-postfix'
 description      'Installs/Configures osl-postfix'
 long_description 'Installs/Configures osl-postfix'
-version          '1.0.1'
+version          '1.0.2'
 
 depends          'apt'
 depends          'firewall'

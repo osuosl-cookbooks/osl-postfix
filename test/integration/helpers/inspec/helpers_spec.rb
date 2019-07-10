@@ -1,7 +1,3 @@
-require 'serverspec'
-
-set :backend, :exec
-
 shared_examples_for 'postfix' do
   describe service 'postfix' do
     it { should be_enabled }

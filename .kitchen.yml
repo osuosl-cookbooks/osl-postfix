@@ -5,6 +5,10 @@ suites:
   - name: default
     run_list:
       - recipe[osl-postfix::default]
+    excludes:
+      - debian-8
   - name: server
     run_list:
       - recipe[osl-postfix::server]
+    excludes:
+      - debian-8

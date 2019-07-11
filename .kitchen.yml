@@ -1,6 +1,13 @@
 ---
 verifier:
   name: inspec
+attributes:
+  boulder:
+    host_aliases:
+      - smtp.snowdrift.coop
+      - www.smtp.snowdrift.coop
+    acme:
+      endpoint: http://127.0.0.1:4000
 suites:
   - name: default
     run_list:
@@ -10,5 +17,3 @@ suites:
   - name: server
     run_list:
       - recipe[osl-postfix::server]
-    excludes:
-      - debian-8

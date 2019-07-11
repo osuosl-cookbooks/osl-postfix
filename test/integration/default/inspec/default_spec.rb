@@ -1,11 +1,3 @@
-describe package 'postfix' do
-  it { should be_installed }
-end
-
-describe service 'postfix' do
-  it { should be_running }
-end
-
 describe ini '/etc/postfix/main.cf' do
   its('myorigin') { should match '$mydomain' }
   its('relayhost') { should match '[smtp.osuosl.org]:25' }

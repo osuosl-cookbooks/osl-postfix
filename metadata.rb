@@ -1,10 +1,10 @@
 name             'osl-postfix'
 maintainer       'Oregon State University'
 maintainer_email 'chef@osuosl.org'
-license          'Apache-2.0'
-chef_version     '>= 12.18' if respond_to?(:chef_version)
-issues_url       'https://github.com/osuosl-cookbooks/osl-postfix/issues'
 source_url       'https://github.com/osuosl-cookbooks/osl-postfix'
+issues_url       'https://github.com/osuosl-cookbooks/osl-postfix/issues'
+license          'Apache-2.0'
+chef_version     '>= 14.0'
 description      'Installs/Configures osl-postfix'
 long_description 'Installs/Configures osl-postfix'
 version          '1.0.2'

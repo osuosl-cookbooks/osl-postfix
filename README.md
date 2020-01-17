@@ -6,7 +6,11 @@ Requirements
 ------------
 
 #### Platforms
+- CentOS 6
 - CentOS 7
+- CentOS 8
+- Debian 9 
+- Debian 10
 
 #### Cookbooks
 - [`postfix`](https://github.com/chef-cookbooks/postfix) - the upstream cookbook that `osl-postfix` wraps

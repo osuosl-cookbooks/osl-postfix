@@ -8,7 +8,6 @@ chef_version     '>= 14.0'
 description      'Installs/Configures osl-postfix'
 version          '1.0.3'
 
-depends          'apt'
 depends          'firewall'
 depends          'postfix', '~> 5.3.0'
 

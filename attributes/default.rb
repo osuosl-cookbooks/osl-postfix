@@ -7,7 +7,7 @@ case node['network']['default_gateway']
 when '10.162.136.1', '128.193.126.193', '148.100.110.1'
   default['osl-postfix']['main']['relayhost'] = '[smtp.osuosl.org]:587'
   default['osl-postfix']['main']['smtp_use_tls'] = 'yes'
-  if node['platform_family'] == 'debian'
+  if platform_family?('debian')
     default['osl-postfix']['main']['smtp_tls_CAfile'] = '/etc/ssl/certs/ca-certificates.crt'
   end
 else

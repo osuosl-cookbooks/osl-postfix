@@ -6,7 +6,6 @@ issues_url       'https://github.com/osuosl-cookbooks/osl-postfix/issues'
 license          'Apache-2.0'
 chef_version     '>= 14.0'
 description      'Installs/Configures osl-postfix'
-long_description 'Installs/Configures osl-postfix'
 version          '1.0.3'
 
 depends          'apt'

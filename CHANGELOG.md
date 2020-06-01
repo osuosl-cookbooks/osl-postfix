@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+1.1.0 (2020-06-01)
+------------------
+- Chef 15 updates
+
 1.0.3 (2020-01-10)
 ------------------
 - Chef 14 post-migration fixes

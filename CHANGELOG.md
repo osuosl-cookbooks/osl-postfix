@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+1.2.1 (2020-08-21)
+------------------
+- Chef 16 Update
+
 1.2.0 (2020-07-01)
 ------------------
 - Remove support for debian 9

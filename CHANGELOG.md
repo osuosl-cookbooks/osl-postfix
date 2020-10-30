@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+1.2.3 (2020-10-30)
+------------------
+- Set Postfix compatibility level
+
 1.2.2 (2020-10-20)
 ------------------
 - Bump postfix cookbook to 5.4.0

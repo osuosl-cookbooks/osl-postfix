@@ -3,7 +3,7 @@ describe ini '/etc/postfix/main.cf' do
   its('relayhost') { should match '[smtp.osuosl.org]:25' }
   its('smtpd_use_tls') { should match 'no' }
   its('smtp_use_tls') { should match 'no' }
-  its('compatibility_level') { should match '2' }
+  its('compatibility_level') { should match '2' } if os.redhat? && os.release.to_i == 8
 end
 
 describe file '/etc/postfix/main.cf' do

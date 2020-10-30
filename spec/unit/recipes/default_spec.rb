@@ -18,12 +18,18 @@ describe 'osl-postfix::default' do
         'relayhost = [smtp.osuosl.org]:25',
         'smtpd_use_tls = no',
         'smtp_use_tls = no',
-        'compatibility_level = 2',
       ].each do |line|
         it do
           expect(chef_run).to render_file('/etc/postfix/main.cf').with_content(line)
         end
       end
+
+      if p[:version] == '8'
+        it do
+          expect(chef_run).to render_file('/etc/postfix/main.cf').with_content('compatibility_level = 2')
+        end
+      end
+
       context 'postfix submission port' do
         cached(:chef_run) do
           ChefSpec::SoloRunner.new(p) do |node|

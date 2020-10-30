@@ -10,3 +10,7 @@ end
 describe package 'postfix' do
   it { should be_installed }
 end
+
+describe command 'journalctl -u postfix' do
+  its('stdout') { should_not match /Postfix is running with backwards-compatible default settings/ }
+end

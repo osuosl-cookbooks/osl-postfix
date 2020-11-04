@@ -23,7 +23,7 @@ end
 package 'postfix-perl-scripts' if platform_family?('rhel')
 
 %w(pfcat pfdel).each do |f|
-  cookbook_file "/usr/local/bin/#{f}" do
+  cookbook_file "/usr/local/sbin/#{f}" do
     source "server/#{f}"
     mode '755'
   end

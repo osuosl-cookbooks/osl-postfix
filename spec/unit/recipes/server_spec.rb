@@ -21,7 +21,7 @@ describe 'osl-postfix::server' do
 
       %w(pfcat pfdel).each do |f|
         it do
-          expect(chef_run).to create_cookbook_file("/usr/local/bin/#{f}").with(
+          expect(chef_run).to create_cookbook_file("/usr/local/sbin/#{f}").with(
             source: "server/#{f}"
           )
         end

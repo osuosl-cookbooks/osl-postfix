@@ -13,6 +13,20 @@ describe 'osl-postfix::server' do
         expect { chef_run }.to_not raise_error
       end
 
+      if p[:platform] == 'centos'
+        it do
+          expect(chef_run).to install_package('postfix-perl-scripts')
+        end
+      end
+
+      %w(pfcat pfdel).each do |f|
+        it do
+          expect(chef_run).to create_cookbook_file("/usr/local/sbin/#{f}").with(
+            source: "server/#{f}"
+          )
+        end
+      end
+
       %w(
         firewall::smtp
         postfix::server

@@ -31,5 +31,6 @@ package 'postfix-perl-scripts' if platform_family?('rhel')
   end
 end
 
-include_recipe 'firewall::smtp'
+osl_firewall_port 'smtp'
+
 include_recipe 'postfix::server'

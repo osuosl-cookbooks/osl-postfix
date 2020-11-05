@@ -8,7 +8,7 @@ chef_version     '>= 14.0'
 description      'Installs/Configures osl-postfix'
 version          '1.5.0'
 
-depends          'firewall'
+depends          'osl-firewall'
 depends          'osl-selinux'
 depends          'postfix', '~> 5.4.0'
 

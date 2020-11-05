@@ -27,25 +27,19 @@ describe 'osl-postfix::server' do
         end
       end
 
-      case p
-      when DEBIAN_10
-        %w(
-          firewall::smtp
-          postfix::server
-        ).each do |recipe|
-          it do
-            expect(chef_run).to include_recipe recipe
-          end
-        end
-      else
-        %w(
-          firewall::smtp
-          postfix::server
-          osl-selinux::default
-        ).each do |recipe|
-          it do
-            expect(chef_run).to include_recipe recipe
-          end
+      it do
+        expect(chef_run).to accept_osl_firewall_port('smtp')
+      end
+
+      it do
+        expect(chef_run).to include_recipe('postfix::server')
+      end
+
+      it do
+        if p[:platform] == 'centos'
+          expect(chef_run).to include_recipe('osl-selinux::default')
+        else
+          expect(chef_run).to_not include_recipe('osl-selinux::default')
         end
       end
 

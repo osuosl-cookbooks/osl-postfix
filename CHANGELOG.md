@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+1.4.0 (2021-01-13)
+------------------
+- Remove Centos 6
+
 1.3.0 (2020-11-05)
 ------------------
 - Add pfcat, pfdel scripts from cfengine

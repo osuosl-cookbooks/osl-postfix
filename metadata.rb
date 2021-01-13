@@ -11,7 +11,6 @@ version          '1.3.0'
 depends          'firewall'
 depends          'postfix', '~> 5.4.0'
 
-supports         'centos', '~> 6.0'
 supports         'centos', '~> 7.0'
 supports         'centos', '~> 8.0'
 supports         'debian', '~> 10.0'

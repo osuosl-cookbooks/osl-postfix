@@ -16,6 +16,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+if platform_family?('rhel')
+  include_recipe 'osl-selinux'
+end
+
 node.default['postfix']['mail_type'] = 'client'
 
 node['osl-postfix']['main'].each do |key, value|

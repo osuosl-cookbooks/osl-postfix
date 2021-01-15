@@ -27,12 +27,25 @@ describe 'osl-postfix::server' do
         end
       end
 
-      %w(
-        firewall::smtp
-        postfix::server
-      ).each do |recipe|
-        it do
-          expect(chef_run).to include_recipe recipe
+      case p
+      when DEBIAN_10
+        %w(
+          firewall::smtp
+          postfix::server
+        ).each do |recipe|
+          it do
+            expect(chef_run).to include_recipe recipe
+          end
+        end
+      else
+        %w(
+          firewall::smtp
+          postfix::server
+          osl-selinux::default
+        ).each do |recipe|
+          it do
+            expect(chef_run).to include_recipe recipe
+          end
         end
       end
 

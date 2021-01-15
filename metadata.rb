@@ -9,6 +9,7 @@ description      'Installs/Configures osl-postfix'
 version          '1.4.0'
 
 depends          'firewall'
+depends          'osl-selinux'
 depends          'postfix', '~> 5.4.0'
 
 supports         'centos', '~> 7.0'

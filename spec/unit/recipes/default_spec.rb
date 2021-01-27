@@ -53,11 +53,23 @@ describe 'osl-postfix::default' do
           end
         end
       end
-      %w(
-        postfix::default
-      ).each do |recipe|
-        it do
-          expect(chef_run).to include_recipe recipe
+      case p
+      when DEBIAN_10
+        %w(
+          postfix::default
+        ).each do |recipe|
+          it do
+            expect(chef_run).to include_recipe recipe
+          end
+        end
+      else
+        %w(
+          postfix::default
+          osl-selinux::default
+        ).each do |recipe|
+          it do
+            expect(chef_run).to include_recipe recipe
+          end
         end
       end
     end

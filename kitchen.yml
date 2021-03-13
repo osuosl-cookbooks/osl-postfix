@@ -17,3 +17,4 @@ suites:
   - name: server
     run_list:
       - recipe[osl-postfix::server]
+      - recipe[postfix::aliases]

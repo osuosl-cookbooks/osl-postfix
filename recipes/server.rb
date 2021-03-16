@@ -22,6 +22,10 @@ node['osl-postfix']['main'].each do |key, value|
   node.default['postfix']['main'][key] = value
 end
 
+node['osl-postfix']['aliases'].each do |key, value|
+  node.default['postfix']['aliases'][key] = value
+end
+
 package 'postfix-perl-scripts' if platform_family?('rhel')
 
 %w(pfcat pfdel).each do |f|

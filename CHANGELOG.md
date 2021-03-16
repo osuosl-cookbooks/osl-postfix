@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+1.5.1 (2021-03-16)
+------------------
+- Include default system mail aliases
+
 1.5.0 (2021-01-27)
 ------------------
 - Enable selinux enforcing

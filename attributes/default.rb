@@ -6,7 +6,7 @@ default['osl-postfix']['aliases'] = osl_postfix_system_aliases
 
 case node['network']['default_gateway']
 # We must use the submission port on these networks
-when '10.162.136.1', '128.193.126.193', '148.100.110.1'
+when '10.162.136.1', '128.193.126.193', '148.100.110.1', '10.6.4.1'
   default['osl-postfix']['main']['relayhost'] = '[smtp.osuosl.org]:587'
   default['osl-postfix']['main']['smtp_use_tls'] = 'yes'
   if platform_family?('debian')

@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+1.5.2 (2021-03-27)
+------------------
+- Fix outbound email for hosts on bak.milne.osuosl.org
+
 1.5.1 (2021-03-16)
 ------------------
 - Include default system mail aliases

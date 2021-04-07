@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+1.6.0 (2021-04-07)
+------------------
+- Update Chef dependency to >= 16
+
 1.5.2 (2021-03-27)
 ------------------
 - Fix outbound email for hosts on bak.milne.osuosl.org

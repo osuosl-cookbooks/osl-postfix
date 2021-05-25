@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+2.0.0 (2021-05-25)
+------------------
+- Update to new osl-firewall resources
+
 1.6.0 (2021-04-07)
 ------------------
 - Update Chef dependency to >= 16

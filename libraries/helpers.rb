@@ -81,6 +81,18 @@ module OslPostfix
           'xfs' => 'root',
         }
       end
+
+      def osl_postfix_tls_exclude_ciphers
+        %w(EXP MEDIUM LOW DES 3DES SSLv2)
+      end
+
+      def osl_postfix_tls_protocols
+        %w(!SSLv2 !SSLv3 !TLSv1 !TLSv1.1)
+      end
+
+      def osl_postfix_tls_high_cipherlist
+        'kEECDH:+kEECDH+SHA:kEDH:+kEDH+SHA:+kEDH+CAMELLIA:kECDH:+kECDH+SHA:kRSA:+kRSA+SHA:+kRSA+CAMELLIA:!aNULL:!eNULL:!SSLv2:!RC4:!MD5:!DES:!EXP:!SEED:!IDEA:!3DES'
+      end
     end
   end
 end

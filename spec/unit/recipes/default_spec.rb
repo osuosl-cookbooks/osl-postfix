@@ -16,7 +16,6 @@ describe 'osl-postfix::default' do
         '# Configured as client',
         'myorigin = $mydomain',
         'relayhost = [smtp.osuosl.org]:25',
-        'smtpd_use_tls = no',
         'smtp_use_tls = no',
       ].each do |line|
         it do

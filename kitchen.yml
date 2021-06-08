@@ -4,6 +4,8 @@ provisioner:
   enforce_idempotency: true
   multiple_converge: 2
   deprecations_as_errors: true
+  data_bags_path: test/integration/data_bags
+  encrypted_data_bag_secret_key_path: test/integration/encrypted_data_bag_secret
   attributes:
     osl-selinux:
       enforcing: true
@@ -18,3 +20,48 @@ suites:
     run_list:
       - recipe[osl-postfix::server]
       - recipe[postfix::aliases]
+    verifier:
+      inspec_tests:
+        - name: default
+          path: test/integration/default
+        - name: server
+          path: test/integration/server
+      controls:
+        - postfix-common
+        - postfix-server
+    excludes:
+      - debian-10
+  - name: server-ssl
+    run_list:
+      - recipe[certificate::wildcard]
+      - recipe[osl-postfix::server]
+      - recipe[postfix::aliases]
+    attributes:
+      osl-postfix:
+        main:
+          smtpd_tls_cert_file: /etc/pki/tls/certs/wildcard.pem
+          smtpd_tls_key_file: /etc/pki/tls/private/wildcard.key
+      postfix:
+        master:
+          smtps:
+            active: true
+    verifier:
+      inspec_tests:
+        - name: default
+          path: test/integration/default
+        - name: server
+          path: test/integration/server
+        - name: server-ssl
+          path: test/integration/server-ssl
+        - name: osuosl-baseline
+          git: https://github.com/osuosl/osuosl-baseline.git
+      controls:
+        - postfix-common
+        - postfix-server
+        - postfix-server-ssl
+        - ssl-baseline
+      inputs:
+        ssl_port:
+          - 465
+    excludes:
+      - debian-10

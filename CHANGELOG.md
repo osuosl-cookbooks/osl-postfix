@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+2.1.0 (2021-06-08)
+------------------
+- Use saner TLS/SSL settings
+
 2.0.0 (2021-05-25)
 ------------------
 - Update to new osl-firewall resources

@@ -41,6 +41,8 @@ suites:
         main:
           smtpd_tls_cert_file: /etc/pki/tls/certs/wildcard.pem
           smtpd_tls_key_file: /etc/pki/tls/private/wildcard.key
+          smtpd_tls_security_level: may
+          smtpd_use_tls: 'yes'
       postfix:
         master:
           smtps:
@@ -61,6 +63,7 @@ suites:
         - postfix-server-ssl
         - ssl-baseline
       inputs:
+        smtpd_tls_security_level: 'may'
         ssl_port:
           - 465
     excludes:

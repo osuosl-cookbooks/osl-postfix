@@ -1,9 +1,13 @@
+smtpd_tls_security_level = input('smtpd_tls_security_level')
+
 control 'postfix-default' do
   describe ini '/etc/postfix/main.cf' do
     its('myorigin') { should match '$mydomain' }
     its('relayhost') { should match '[smtp.osuosl.org]:25' }
     its('smtpd_use_tls') { should match 'no' }
     its('smtp_use_tls') { should match 'no' }
+    its('smtpd_tls_security_level') { should match smtpd_tls_security_level }
+    its('smtp_tls_security_level') { should match 'may' }
     its('compatibility_level') { should match '2' } if os.redhat? && os.release.to_i == 8
   end
 

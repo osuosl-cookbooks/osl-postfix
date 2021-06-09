@@ -1,6 +1,7 @@
 tls_protocols = '!SSLv2,!SSLv3,!TLSv1,!TLSv1.1'
 exclude_ciphers = 'EXP,MEDIUM,LOW,DES,3DES,SSLv2'
 cipherlist = 'kEECDH:+kEECDH+SHA:kEDH:+kEDH+SHA:+kEDH+CAMELLIA:kECDH:+kECDH+SHA:kRSA:+kRSA+SHA:+kRSA+CAMELLIA:!aNULL:!eNULL:!SSLv2:!RC4:!MD5:!DES:!EXP:!SEED:!IDEA:!3DES'
+smtpd_tls_security_level = input('smtpd_tls_security_level')
 
 control 'postfix-server' do
   describe file '/etc/postfix/main.cf' do
@@ -16,7 +17,7 @@ control 'postfix-server' do
     its('smtpd_tls_exclude_ciphers') { should cmp exclude_ciphers }
     its('smtpd_tls_mandatory_protocols') { should cmp tls_protocols }
     its('smtpd_tls_protocols') { should cmp tls_protocols }
-    its('smtpd_tls_security_level') { should cmp 'may' }
+    its('smtpd_tls_security_level') { should cmp smtpd_tls_security_level }
     its('smtp_tls_ciphers') { should cmp 'high' }
     its('smtp_tls_exclude_ciphers') { should cmp exclude_ciphers }
     its('smtp_tls_mandatory_protocols') { should cmp tls_protocols }

@@ -1,4 +1,7 @@
 name: server
+inputs:
+  - name: smtpd_tls_security_level
+    value: none
 depends:
   - name: default
     path: test/integration/default

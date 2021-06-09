@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+2.1.1 (2021-06-09)
+------------------
+- Don't enable STARTTLS by default for servers
+
 2.1.0 (2021-06-08)
 ------------------
 - Use saner TLS/SSL settings

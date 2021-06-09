@@ -1,1 +1,4 @@
 name: default
+inputs:
+  - name: smtpd_tls_security_level
+    value: none

@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+2.1.2 (2021-09-03)
+------------------
+- added support for debian 11
+
 2.1.1 (2021-06-09)
 ------------------
 - Don't enable STARTTLS by default for servers

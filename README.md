@@ -9,7 +9,6 @@ Requirements
 - CentOS 6
 - CentOS 7
 - CentOS 8
-- Debian 10
 - Debian 11
 
 #### Cookbooks

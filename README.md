@@ -6,9 +6,8 @@ Requirements
 ------------
 
 #### Platforms
-- CentOS 6
 - CentOS 7
-- CentOS 8
+- CentOS Stream 8
 - Debian 11
 
 #### Cookbooks

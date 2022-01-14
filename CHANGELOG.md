@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+2.2.0 (2022-01-14)
+------------------
+- removed support for debian 10
+
 2.1.2 (2021-09-03)
 ------------------
 - added support for debian 11

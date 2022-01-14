@@ -30,7 +30,6 @@ suites:
         - postfix-common
         - postfix-server
     excludes:
-      - debian-10
       - debian-11
   - name: server-ssl
     run_list:
@@ -68,5 +67,4 @@ suites:
         ssl_port:
           - 465
     excludes:
-      - debian-10
       - debian-11

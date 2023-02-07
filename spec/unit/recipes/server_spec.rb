@@ -13,7 +13,7 @@ describe 'osl-postfix::server' do
         expect { chef_run }.to_not raise_error
       end
 
-      if p[:platform] == 'centos'
+      if p[:platform] == 'centos' || p[:platform] == 'almalinux'
         it do
           expect(chef_run).to install_package('postfix-perl-scripts')
         end
@@ -36,7 +36,7 @@ describe 'osl-postfix::server' do
       end
 
       it do
-        if p[:platform] == 'centos'
+        if p[:platform] == 'centos' || p[:platform] == 'almalinux'
           expect(chef_run).to include_recipe('osl-selinux::default')
         else
           expect(chef_run).to_not include_recipe('osl-selinux::default')

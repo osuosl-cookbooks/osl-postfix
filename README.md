@@ -6,6 +6,7 @@ Requirements
 ------------
 
 #### Platforms
+- AlmaLinux 8
 - CentOS 7
 - CentOS Stream 8
 - Debian 11

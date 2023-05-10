@@ -14,5 +14,4 @@ depends          'postfix', '~> 5.4.0'
 
 supports         'almalinux', '~> 8.0'
 supports         'centos', '~> 7.0'
-supports         'centos_stream', '~> 8.0'
 supports         'debian', '~> 11.0'

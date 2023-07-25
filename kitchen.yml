@@ -31,6 +31,7 @@ suites:
         - postfix-server
     excludes:
       - debian-11
+      - debian-12
   - name: server-ssl
     run_list:
       - recipe[certificate::wildcard]
@@ -68,3 +69,4 @@ suites:
           - 465
     excludes:
       - debian-11
+      - debian-12

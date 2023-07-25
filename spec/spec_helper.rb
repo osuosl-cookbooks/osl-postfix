@@ -16,10 +16,16 @@ DEBIAN_11 = {
   version: '11',
 }.freeze
 
+DEBIAN_12 = {
+  platform: 'debian',
+  version: '12',
+}.freeze
+
 ALL_PLATFORMS = [
   ALMA_8,
   CENTOS_7,
   DEBIAN_11,
+  DEBIAN_12,
 ].freeze
 
 RSpec.configure do |config|

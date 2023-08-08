@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+2.2.2 (2023-08-08)
+------------------
+- Add Debian 12
+
 2.2.1 (2023-02-08)
 ------------------
 - Support AlmaLinux 8

@@ -2,7 +2,7 @@ smtpd_tls_security_level = input('smtpd_tls_security_level')
 
 control 'postfix-default' do
   describe ini '/etc/postfix/main.cf' do
-    its('myorigin') { should match '$mydomain' }
+    its('myorigin') { should match '$myhostname' }
     its('relayhost') { should match '[smtp.osuosl.org]:25' }
     its('smtpd_use_tls') { should match 'no' }
     its('smtp_use_tls') { should match 'no' }

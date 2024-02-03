@@ -2,7 +2,7 @@ default['osl-postfix']['main'] = {}
 default['osl-postfix']['main']['compatibility_level'] = '2' if platform_version >= 8
 default['osl-postfix']['main']['lmtp_tls_mandatory_protocols'] = osl_postfix_tls_protocols.join(',')
 default['osl-postfix']['main']['lmtp_tls_protocols'] = osl_postfix_tls_protocols.join(',')
-default['osl-postfix']['main']['myorigin'] = '$mydomain'
+default['osl-postfix']['main']['myorigin'] = '$myhostname'
 default['osl-postfix']['main']['smtp_tls_ciphers'] = 'high'
 default['osl-postfix']['main']['smtp_tls_exclude_ciphers'] = osl_postfix_tls_exclude_ciphers.join(',')
 default['osl-postfix']['main']['smtp_tls_mandatory_protocols'] = osl_postfix_tls_protocols.join(',')

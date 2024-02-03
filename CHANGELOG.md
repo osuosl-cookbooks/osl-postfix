@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+2.2.3 (2024-02-03)
+------------------
+- Use hostname for myorigin by default
+
 2.2.2 (2023-08-08)
 ------------------
 - Add Debian 12

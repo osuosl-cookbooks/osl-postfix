@@ -11,7 +11,7 @@ control 'postfix-server' do
   describe postfix_conf do
     its('lmtp_tls_mandatory_protocols') { should cmp tls_protocols }
     its('lmtp_tls_protocols') { should cmp tls_protocols }
-    its('myorigin') { should cmp '$myhostname' }
+    its('myorigin') { should cmp '$mydomain' }
     its('smtpd_tls_ciphers') { should cmp 'high' }
     its('smtpd_tls_eecdh_grade') { should cmp 'strong' }
     its('smtpd_tls_exclude_ciphers') { should cmp exclude_ciphers }

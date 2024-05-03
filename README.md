@@ -8,7 +8,7 @@ Requirements
 #### Platforms
 - AlmaLinux 8
 - CentOS 7
-- Debian 11
+- Debian 12
 
 #### Cookbooks
 - [`postfix`](https://github.com/chef-cookbooks/postfix) - the upstream cookbook that `osl-postfix` wraps

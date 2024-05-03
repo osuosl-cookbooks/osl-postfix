@@ -45,7 +45,7 @@ describe 'osl-postfix::default' do
         end
         it do
           case p
-          when DEBIAN_11, DEBIAN_12
+          when DEBIAN_12
             expect(chef_run).to render_file('/etc/postfix/main.cf').with_content('smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt')
           else
             expect(chef_run).to_not render_file('/etc/postfix/main.cf').with_content('smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt')
@@ -53,7 +53,7 @@ describe 'osl-postfix::default' do
         end
       end
       case p
-      when DEBIAN_11, DEBIAN_12
+      when DEBIAN_12
         %w(
           postfix::default
         ).each do |recipe|

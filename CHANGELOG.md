@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+2.2.5 (2024-05-03)
+------------------
+- Remove support for Debian 12
+
 2.2.4 (2024-02-08)
 ------------------
 - Revert "Use hostname for myorigin by default"

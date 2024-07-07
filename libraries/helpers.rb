@@ -2,7 +2,7 @@ module OslPostfix
   module Cookbook
     module Helpers
       def osl_postfix_system_aliases
-        # Defaults on CentOS 8
+        # Defaults on RHEL 8
         {
           'abuse' => 'root',
           'adm' => 'root',

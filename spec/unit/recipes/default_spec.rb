@@ -18,16 +18,10 @@ describe 'osl-postfix::default' do
         'relayhost = [smtp.osuosl.org]:25',
         'smtp_use_tls = no',
       ].each do |line|
-        it do
-          expect(chef_run).to render_file('/etc/postfix/main.cf').with_content(line)
-        end
+        it { is_expected.to render_file('/etc/postfix/main.cf').with_content(line) }
       end
 
-      if p[:version] == '8'
-        it do
-          expect(chef_run).to render_file('/etc/postfix/main.cf').with_content('compatibility_level = 2')
-        end
-      end
+      it { is_expected.to render_file('/etc/postfix/main.cf').with_content('compatibility_level = 2') }
 
       context 'postfix submission port' do
         cached(:chef_run) do
@@ -39,16 +33,14 @@ describe 'osl-postfix::default' do
           'relayhost = [smtp.osuosl.org]:587',
           'smtp_use_tls = yes',
         ].each do |line|
-          it do
-            expect(chef_run).to render_file('/etc/postfix/main.cf').with_content(line)
-          end
+          it { is_expected.to render_file('/etc/postfix/main.cf').with_content(line) }
         end
         it do
           case p
           when DEBIAN_12
-            expect(chef_run).to render_file('/etc/postfix/main.cf').with_content('smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt')
+            is_expected.to render_file('/etc/postfix/main.cf').with_content('smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt')
           else
-            expect(chef_run).to_not render_file('/etc/postfix/main.cf').with_content('smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt')
+            is_expected.to_not render_file('/etc/postfix/main.cf').with_content('smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt')
           end
         end
       end
@@ -57,18 +49,14 @@ describe 'osl-postfix::default' do
         %w(
           postfix::default
         ).each do |recipe|
-          it do
-            expect(chef_run).to include_recipe recipe
-          end
+          it { is_expected.to include_recipe recipe }
         end
       else
         %w(
           postfix::default
           osl-selinux::default
         ).each do |recipe|
-          it do
-            expect(chef_run).to include_recipe recipe
-          end
+          it { is_expected.to include_recipe recipe }
         end
       end
     end

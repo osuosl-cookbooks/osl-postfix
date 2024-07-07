@@ -14,40 +14,25 @@ describe 'osl-postfix::server' do
       end
 
       case p[:platform]
-      when 'almalinux', 'centos'
-        it do
-          expect(chef_run).to install_package('postfix-perl-scripts')
-        end
+      when 'almalinux'
+        it { is_expected.to install_package('postfix-perl-scripts') }
       end
 
       %w(pfcat pfdel).each do |f|
-        it do
-          expect(chef_run).to create_cookbook_file("/usr/local/sbin/#{f}").with(
-            source: "server/#{f}"
-          )
-        end
+        it { is_expected.to create_cookbook_file("/usr/local/sbin/#{f}").with(source: "server/#{f}") }
       end
 
-      it do
-        expect(chef_run).to accept_osl_firewall_port('smtp')
+      it { is_expected.to accept_osl_firewall_port('smtp') }
+      it { is_expected.to include_recipe('postfix::server') }
+
+      case p[:platform]
+      when 'almalinux'
+        it { is_expected.to include_recipe('osl-selinux::default') }
+      else
+        it { is_expected.to_not include_recipe('osl-selinux::default') }
       end
 
-      it do
-        expect(chef_run).to include_recipe('postfix::server')
-      end
-
-      it do
-        case p[:platform]
-        when 'almalinux', 'centos'
-          expect(chef_run).to include_recipe('osl-selinux::default')
-        else
-          expect(chef_run).to_not include_recipe('osl-selinux::default')
-        end
-      end
-
-      it do
-        expect(chef_run).to render_file('/etc/postfix/main.cf').with_content(/# Configured as master/)
-      end
+      it { is_expected.to render_file('/etc/postfix/main.cf').with_content(/# Configured as master/) }
     end
   end
 end

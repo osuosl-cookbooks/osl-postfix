@@ -6,8 +6,7 @@ Requirements
 ------------
 
 #### Platforms
-- AlmaLinux 8
-- CentOS 7
+- AlmaLinux 8, 9
 - Debian 12
 
 #### Cookbooks

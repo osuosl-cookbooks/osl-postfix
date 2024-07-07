@@ -8,7 +8,7 @@ control 'postfix-default' do
     its('smtp_use_tls') { should match 'no' }
     its('smtpd_tls_security_level') { should match smtpd_tls_security_level }
     its('smtp_tls_security_level') { should match 'may' }
-    its('compatibility_level') { should match '2' } if os.redhat? && os.release.to_i == 8
+    its('compatibility_level') { should match '2' } if os.redhat?
   end
 
   describe file '/etc/postfix/main.cf' do

@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+2.3.1 (2024-07-29)
+------------------
+- Implement workarounds for SMTP Smuggling
+
 2.3.0 (2024-07-07)
 ------------------
 - Remove support for CentOS 7

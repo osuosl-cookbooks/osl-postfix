@@ -6,7 +6,7 @@ issues_url       'https://github.com/osuosl-cookbooks/osl-postfix/issues'
 license          'Apache-2.0'
 chef_version     '>= 16.0'
 description      'Installs/Configures osl-postfix'
-version          '2.3.0'
+version          '2.3.1'
 
 depends          'osl-firewall'
 depends          'osl-selinux'

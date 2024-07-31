@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+2.3.2 (2024-07-31)
+------------------
+- Add support for Ubuntu
+
 2.3.1 (2024-07-29)
 ------------------
 - Implement workarounds for SMTP Smuggling

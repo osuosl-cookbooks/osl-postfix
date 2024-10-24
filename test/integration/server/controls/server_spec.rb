@@ -1,3 +1,4 @@
+docker = inspec.file('/.dockerenv').exist?
 tls_protocols = '!SSLv2,!SSLv3,!TLSv1,!TLSv1.1'
 exclude_ciphers = 'EXP,MEDIUM,LOW,DES,3DES,SSLv2'
 cipherlist = 'kEECDH:+kEECDH+SHA:kEDH:+kEDH+SHA:+kEDH+CAMELLIA:kECDH:+kECDH+SHA:kRSA:+kRSA+SHA:+kRSA+CAMELLIA:!aNULL:!eNULL:!SSLv2:!RC4:!MD5:!DES:!EXP:!SEED:!IDEA:!3DES'
@@ -31,7 +32,7 @@ control 'postfix-server' do
 
   describe iptables do
     it { should have_rule('-A smtp -p tcp -m tcp --dport 25 -j ACCEPT') }
-  end
+  end unless docker
 
   describe package 'postfix-perl-scripts' do
     it { should be_installed }

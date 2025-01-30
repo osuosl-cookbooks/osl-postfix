@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+2.4.0 (2025-01-30)
+------------------
+- Update to postfix-6.1.0 cookbook
+
 2.3.2 (2024-07-31)
 ------------------
 - Add support for Ubuntu

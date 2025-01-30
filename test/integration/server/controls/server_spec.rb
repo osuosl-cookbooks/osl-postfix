@@ -146,7 +146,7 @@ control 'postfix-server' do
       'www' => 'webmaster',
       'xfs' => 'root',
     }.each do |key, value|
-      its('content') { should match /^#{key}: "#{value}"$/ }
+      its('content') { should match /^#{key}: #{value}$/ }
     end
     its('content') { should match /^postmaster:\s+root$/ }
   end

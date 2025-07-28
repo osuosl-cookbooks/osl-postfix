@@ -6,6 +6,11 @@ ALMA_8 = {
   version: '8',
 }.freeze
 
+ALMA_10 = {
+  platform: 'almalinux',
+  version: '10',
+}.freeze
+
 DEBIAN_12 = {
   platform: 'debian',
   version: '12',
@@ -23,6 +28,7 @@ ALL_DEBIAN = [
 
 ALL_PLATFORMS = [
   ALMA_8,
+  ALMA_10,
   DEBIAN_12,
   UBUNTU_2404,
 ].freeze

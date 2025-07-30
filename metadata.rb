@@ -10,9 +10,10 @@ version          '2.4.0'
 
 depends          'osl-firewall'
 depends          'osl-selinux'
-depends          'postfix', '~> 6.1.0'
+depends          'postfix', '~> 6.3.0'
 
 supports         'almalinux', '~> 8.0'
 supports         'almalinux', '~> 9.0'
+supports         'almalinux', '~> 10.0'
 supports         'debian', '~> 12.0'
 supports         'ubuntu', '~> 24.04'

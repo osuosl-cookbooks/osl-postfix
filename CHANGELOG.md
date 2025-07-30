@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+2.5.0 (2025-07-30)
+------------------
+- Add support for almalinux 10
+
 2.4.0 (2025-01-30)
 ------------------
 - Update to postfix-6.1.0 cookbook

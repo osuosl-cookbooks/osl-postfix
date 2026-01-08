@@ -26,6 +26,7 @@ platforms:
   - name: almalinux-9
   - name: almalinux-10
   - name: debian-12
+  - name: debian-13
 
 suites:
   - name: default
@@ -46,6 +47,7 @@ suites:
         - postfix-server
     excludes:
       - debian-12
+      - debian-13
       - ubuntu-24.04
   - name: server-ssl
     run_list:
@@ -84,4 +86,5 @@ suites:
           - 465
     excludes:
       - debian-12
+      - debian-13
       - ubuntu-24.04

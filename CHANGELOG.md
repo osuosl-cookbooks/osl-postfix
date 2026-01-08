@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+2.5.2 (2026-01-08)
+------------------
+- Debian 13 Integration
+
 2.5.1 (2025-07-30)
 ------------------
 - update postfix cookbook to 6.4.0

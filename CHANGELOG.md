@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+2.5.3 (2026-03-30)
+------------------
+- Add 148.100.84.1 gateway for Marist College s390x VMs
+
 2.5.2 (2026-01-08)
 ------------------
 - Debian 13 Integration

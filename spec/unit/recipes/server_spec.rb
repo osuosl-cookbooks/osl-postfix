@@ -18,7 +18,7 @@ describe 'osl-postfix::server' do
         it { is_expected.to install_package('postfix-perl-scripts') }
       end
 
-      %w(pfcat pfdel).each do |f|
+      %w(pfcat pfdel pftopsenders).each do |f|
         it { is_expected.to create_cookbook_file("/usr/local/sbin/#{f}").with(source: "server/#{f}") }
       end
 

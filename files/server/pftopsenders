@@ -1,0 +1,78 @@
+#!/bin/sh
+#
+# pftopsenders - Rank SASL-authenticated senders and their delivery outcomes
+#                from the Postfix logs, to surface compromised/abusive accounts.
+#
+# On a content-filtered relay (amavis) each message is re-queued under a NEW
+# queue id after filtering, so sasl_username (logged at intake) and the final
+# status=deferred/bounced (logged post-filter) live under different queue ids.
+# This script chains intake -> "queued as <id>" -> final delivery to recover
+# per-sender outcomes. Intake volume is always printed, even if the chain finds
+# no outcomes (e.g. on a relay without a content filter).
+#
+# Usage: pftopsenders [-n COUNT] [-x] [logfile ...]
+#   -n COUNT   show the top COUNT senders (default 40)
+#   -x         exclude osuosl.org senders (the only real local mailboxes); i.e.
+#              show only suspect/foreign authenticated senders
+#   logfile    one or more maillog files (default /var/log/maillog)
+#
+
+PATH=/usr/bin:/usr/sbin
+count=40
+exclude_osuosl=0
+
+while getopts 'n:xh' opt; do
+  case "$opt" in
+    n) count=$OPTARG ;;
+    x) exclude_osuosl=1 ;;
+    h) echo "Usage: pftopsenders [-n COUNT] [-x] [logfile ...]"; exit 0 ;;
+    *) echo "Usage: pftopsenders [-n COUNT] [-x] [logfile ...]"; exit 1 ;;
+  esac
+done
+shift $((OPTIND - 1))
+[ $# -eq 0 ] && set -- /var/log/maillog
+
+printf '%7s %-9s %-9s %-9s  %s\n' msgs sent defer bounce sasl_username
+awk -v excl="$exclude_osuosl" '
+  # queue id = token between the first "]: " and the next ": " (timestamp-format
+  # independent: works for traditional and high-precision/ISO syslog stamps)
+  function qid(   p, r, s) {
+    p = index($0, "]: "); if (!p) return ""
+    r = substr($0, p + 3); s = index(r, ": ")
+    return s ? substr(r, 1, s - 1) : ""
+  }
+  # intake: count only SUCCESSFUL authenticated submissions. Postfix logs
+  # sasl_method= next to sasl_username= on success; failed brute-force attempts
+  # log "authentication failed: ... sasl_username=" WITHOUT sasl_method=, so this
+  # filter keeps them out (failed logins are handled by fail2ban, not here).
+  /sasl_username=/ && /sasl_method=/ {
+    match($0, /sasl_username=[^ ,]+/)
+    us = substr($0, RSTART + 14, RLENGTH - 14)
+    intake[us]++
+    a = qid(); if (a != "") user[a] = us
+  }
+  # amavis handoff: loopback relay + "queued as B" -> reinjected id B owned by user
+  /relay=127\.0\.0\.1\[127\.0\.0\.1\]/ && /queued as / {
+    a = qid()
+    if (a in user) {
+      match($0, /queued as [0-9A-Za-z]+/)
+      b = substr($0, RSTART + 10, RLENGTH - 10)
+      owner[b] = user[a]
+    }
+  }
+  # final delivery: status under the reinjected queue id
+  /status=[a-z]+/ {
+    b = qid()
+    if (b in owner) {
+      match($0, /status=[a-z]+/)
+      out[owner[b] " " substr($0, RSTART + 7, RLENGTH - 7)]++
+    }
+  }
+  END {
+    for (u in intake) {
+      if (excl && u ~ /@osuosl\.org$/) continue
+      printf "%7d %-9d %-9d %-9d  %s\n", \
+        intake[u], out[u " sent"], out[u " deferred"], out[u " bounced"], u
+    }
+  }
+' "$@" | sort -rn | head -n "$count"

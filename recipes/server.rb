@@ -28,7 +28,7 @@ end
 
 package 'postfix-perl-scripts' if platform_family?('rhel')
 
-%w(pfcat pfdel pftopsenders).each do |f|
+%w(pfcat pfdel pftopsenders pfsumm).each do |f|
   cookbook_file "/usr/local/sbin/#{f}" do
     source "server/#{f}"
     mode '755'

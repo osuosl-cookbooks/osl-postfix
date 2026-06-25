@@ -68,6 +68,17 @@ control 'postfix-server' do
     its('stderr') { should match /No messages with the address <foo@bar.com> found in queue./ }
   end
 
+  describe file '/usr/local/sbin/pftopsenders' do
+    it { should exist }
+    it { should be_executable }
+    its('content') { should match /# pftopsenders - Rank SASL-authenticated senders/ }
+  end
+
+  describe command '/usr/local/sbin/pftopsenders -h' do
+    its('exit_status') { should eq 0 }
+    its('stdout') { should match /Usage: pftopsenders/ }
+  end
+
   describe file '/etc/aliases' do
     {
       'abuse' => 'root',

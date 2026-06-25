@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+2.5.4 (2026-06-25)
+------------------
+- Add pftopsenders helper to rank SASL senders by outcome
+
 2.5.3 (2026-03-30)
 ------------------
 - Add 148.100.84.1 gateway for Marist College s390x VMs

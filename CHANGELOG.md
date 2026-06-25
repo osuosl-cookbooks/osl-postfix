@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+2.5.5 (2026-06-25)
+------------------
+- Add pfsumm helper for concise pflogsumm reports
+
 2.5.4 (2026-06-25)
 ------------------
 - Add pftopsenders helper to rank SASL senders by outcome

@@ -1,0 +1,57 @@
+#!/bin/sh
+#
+# pfsumm - Concise pflogsumm: headline counts + top problem reasons only,
+#          without the per-message firehose.
+#
+# Usage: pfsumm [-d today|yesterday] [-H HOURS] [-n COUNT] [logfile ...]
+#   -d WHEN   restrict report to today or yesterday
+#   -H HOURS  restrict report to the last HOURS hours (overrides -d)
+#   -n COUNT  top COUNT entries per section (default 20)
+#   logfile   maillog file(s) (default /var/log/maillog)
+#
+
+PATH=/usr/bin:/usr/sbin
+n=20
+day=
+hours=
+usage='Usage: pfsumm [-d today|yesterday] [-H HOURS] [-n COUNT] [logfile ...]'
+
+while getopts 'd:H:n:h' opt; do
+  case "$opt" in
+    d) day=$OPTARG ;;
+    H) hours=$OPTARG ;;
+    n) n=$OPTARG ;;
+    h) echo "$usage"; exit 0 ;;
+    *) echo "$usage"; exit 1 ;;
+  esac
+done
+shift $((OPTIND - 1))
+[ $# -eq 0 ] && set -- /var/log/maillog
+
+# --detail 0 silences per-message detail; -h and the per-section limits bring
+# back only the top-N host tables and deferral/bounce/reject reasons.
+summarize() {
+  pflogsumm --detail 0 -h "$n" \
+    --deferral-detail "$n" --bounce-detail "$n" --reject-detail "$n" "$@"
+}
+
+if [ -n "$hours" ]; then
+  # Keep only syslog lines from the last $hours hours, then summarize stdin.
+  awk -v hours="$hours" '
+    BEGIN {
+      split("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec", a, " ")
+      for (i = 1; i <= 12; i++) mon[a[i]] = i
+      now = systime(); cutoff = now - hours * 3600
+      curyr = strftime("%Y", now) + 0; curmon = strftime("%m", now) + 0
+    }
+    $1 in mon {
+      m = mon[$1]; yr = (m > curmon) ? curyr - 1 : curyr  # month ahead of now = last year
+      ts = mktime(yr" "m" "$2" "substr($3,1,2)" "substr($3,4,2)" "substr($3,7,2))
+      if (ts >= cutoff) print
+    }
+  ' "$@" | summarize
+elif [ -n "$day" ]; then
+  summarize -d "$day" "$@"
+else
+  summarize "$@"
+fi

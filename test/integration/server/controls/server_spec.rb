@@ -79,6 +79,17 @@ control 'postfix-server' do
     its('stdout') { should match /Usage: pftopsenders/ }
   end
 
+  describe file '/usr/local/sbin/pfsumm' do
+    it { should exist }
+    it { should be_executable }
+    its('content') { should match /# pfsumm - Concise pflogsumm/ }
+  end
+
+  describe command '/usr/local/sbin/pfsumm -h' do
+    its('exit_status') { should eq 0 }
+    its('stdout') { should match /Usage: pfsumm/ }
+  end
+
   describe file '/etc/aliases' do
     {
       'abuse' => 'root',

@@ -19,3 +19,9 @@ bin/*
 Berksfile.lock
 .zero-knife.rb
 Policyfile.lock.json
+
+# Editor / agent local state
+.claude/
+
+# Kitchen converge logs captured at the cookbook root
+*.log

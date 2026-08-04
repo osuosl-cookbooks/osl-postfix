@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+3.0.0 (2026-08-04)
+------------------
+- Rewrite osl-postfix as a resource-first wrapper for postfix 7.0.0
+
 2.5.5 (2026-06-25)
 ------------------
 - Add pfsumm helper for concise pflogsumm reports

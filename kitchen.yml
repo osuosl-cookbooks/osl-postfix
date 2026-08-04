@@ -30,11 +30,36 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[osl-postfix::default]
+      - recipe[postfix_test::default]
+  - name: default-gateway
+    run_list:
+      - recipe[postfix_test::default_gateway]
+    verifier:
+      inspec_tests:
+        - name: default-gateway
+          path: test/integration/default-gateway
+      controls:
+        - postfix-common
+        - postfix-default-gateway
   - name: server
     run_list:
-      - recipe[osl-postfix::server]
-      - recipe[postfix::aliases]
+      - recipe[postfix_test::server]
+    verifier:
+      inspec_tests:
+        - name: default
+          path: test/integration/default
+        - name: server
+          path: test/integration/server
+      controls:
+        - postfix-common
+        - postfix-server
+    excludes:
+      - debian-12
+      - debian-13
+      - ubuntu-24.04
+  - name: server-standalone
+    run_list:
+      - recipe[postfix_test::server_standalone]
     verifier:
       inspec_tests:
         - name: default
@@ -50,20 +75,7 @@ suites:
       - ubuntu-24.04
   - name: server-ssl
     run_list:
-      - recipe[certificate::wildcard]
-      - recipe[osl-postfix::server]
-      - recipe[postfix::aliases]
-    attributes:
-      osl-postfix:
-        main:
-          smtpd_tls_cert_file: /etc/pki/tls/certs/wildcard.pem
-          smtpd_tls_key_file: /etc/pki/tls/private/wildcard.key
-          smtpd_tls_security_level: may
-          smtpd_use_tls: 'yes'
-      postfix:
-        master:
-          smtps:
-            active: true
+      - recipe[postfix_test::server_ssl]
     verifier:
       inspec_tests:
         - name: default

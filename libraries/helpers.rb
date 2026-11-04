@@ -70,6 +70,15 @@ module OslPostfix
         end
       end
 
+      # Stock EL/Debian master.cf services missing from postfix_default_master_settings.
+      # Built fresh each call: deep_merge mutates its destination's nested hashes.
+      def osl_postfix_stock_master_services
+        {
+          'proxywrite' => { 'active' => true, 'order' => 155, 'type' => 'unix', 'chroot' => false, 'maxproc' => '1', 'command' => 'proxymap', 'args' => [] },
+          'retry' => { 'active' => true, 'order' => 195, 'type' => 'unix', 'chroot' => false, 'command' => 'error', 'args' => [] },
+        }
+      end
+
       def osl_postfix_state(name)
         node.run_state[:osl_postfix] ||= {}
         node.run_state[:osl_postfix][name] ||= {
@@ -99,14 +108,8 @@ module OslPostfix
         return if find_resource(:postfix, name)
 
         with_run_context(:root) do
-          # Recipe-level handle for `service[postfix]`. The upstream postfix
-          # resource also declares `service[postfix]` (transitively via
-          # postfix_service[postfix]), but that copy lives inside the inner
-          # postfix resource's nested run-context and is unreachable from
-          # recipe-level `notifies :restart, 'service[postfix]'`. Exposing
-          # one here at the root run-context restores the legacy notify
-          # target downstream cookbooks expect when they manage their own
-          # /etc/postfix/* files alongside the wrapper.
+          # Root-context `service[postfix]` for downstream notifies; upstream's own copy
+          # lives in the inner resource's nested run context, out of their reach.
           unless find_resource(:service, 'postfix')
             declare_resource(:service, 'postfix') do
               action :nothing
@@ -123,7 +126,9 @@ module OslPostfix
                 .merge(osl_postfix_relayhost_for_gateway)
                 .merge(osl_postfix_state(name)[:main_settings])
             }
-            master_settings lazy { osl_postfix_state(name)[:master_settings] }
+            master_settings lazy {
+              Chef::Mixin::DeepMerge.deep_merge(osl_postfix_state(name)[:master_settings], osl_postfix_stock_master_services)
+            }
             aliases lazy { osl_postfix_state(name)[:aliases] }
             access lazy { osl_postfix_state(name)[:access] }
             transports lazy { osl_postfix_state(name)[:transports] }

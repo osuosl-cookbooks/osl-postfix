@@ -39,6 +39,19 @@ describe 'osl_postfix' do
         expect(state[:use_alias_maps]).to eq(false)
       end
 
+      it 'adds the stock retry and proxywrite services missing upstream' do
+        is_expected.to create_postfix('default').with(
+          master_settings: {
+            'proxywrite' => { 'active' => true, 'order' => 155, 'type' => 'unix', 'chroot' => false, 'maxproc' => '1', 'command' => 'proxymap', 'args' => [] },
+            'retry' => { 'active' => true, 'order' => 195, 'type' => 'unix', 'chroot' => false, 'command' => 'error', 'args' => [] },
+          }
+        )
+      end
+
+      it 'leaves the accumulator master state empty' do
+        expect(state[:master_settings]).to eq({})
+      end
+
       case p
       when *ALL_DEBIAN
         it { is_expected.to_not include_recipe 'osl-selinux::default' }
@@ -88,6 +101,38 @@ describe 'osl_postfix' do
           expect(submission['order']).to eq(20)           # upstream default survived
           expect(submission['type']).to eq('inet')        # upstream default survived
           expect(submission['command']).to eq('smtpd')    # upstream default survived
+        end
+
+        it 'passes the caller service and the stock services to the inner resource' do
+          is_expected.to create_postfix('default').with(
+            master_settings: hash_including(
+              'submission' => hash_including('active' => true),
+              'retry' => hash_including('active' => true, 'command' => 'error'),
+              'proxywrite' => hash_including('active' => true, 'command' => 'proxymap')
+            )
+          )
+        end
+      end
+
+      context 'with master_settings disabling the stock retry service' do
+        cached(:chef_run) do
+          chef_runner.converge('postfix_test::blank') do
+            recipe = Chef::Recipe.new('test', '_test', chef_runner.run_context)
+            recipe.instance_exec do
+              osl_postfix 'default' do
+                master_settings('retry' => { 'active' => false })
+              end
+            end
+          end
+        end
+
+        it 'lets the caller override win over the stock entry' do
+          is_expected.to create_postfix('default').with(
+            master_settings: hash_including(
+              'retry' => hash_including('active' => false, 'order' => 195, 'command' => 'error'),
+              'proxywrite' => hash_including('active' => true)
+            )
+          )
         end
       end
 

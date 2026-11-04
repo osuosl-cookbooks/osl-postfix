@@ -1,4 +1,8 @@
-include_recipe 'certificate::wildcard'
+certificate_manage 'wildcard' do
+  cert_file 'wildcard.pem'
+  key_file 'wildcard.key'
+  chain_file 'wildcard-bundle.crt'
+end
 
 osl_postfix 'default' # simulates the base role baseline
 

@@ -97,6 +97,15 @@ master_settings('smtps' => { 'active' => true })
 # → smtps ends up with active=true plus the upstream-default order/type/command/args
 ```
 
+Every rendered `master.cf` (from `osl_postfix` or `osl_postfix_server`, with or
+without `master_settings`) also gets the stock `retry` and `proxywrite` services,
+which the distro packages ship but `postfix_default_master_settings` omits
+(`osl_postfix_stock_master_services`). Without `retry`, mail for a destination
+postfix has marked dead defers as "mail transport unavailable". Callers can still
+override either entry, e.g. `master_settings('retry' => { 'active' => false })`.
+`postlog` is left out on purpose: the upstream template can't render its
+`unix-dgram` type, and nothing here sets `maillog_file`.
+
 Helpers
 -------
 

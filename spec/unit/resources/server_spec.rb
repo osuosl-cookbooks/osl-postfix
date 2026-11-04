@@ -99,6 +99,15 @@ describe 'osl_postfix_server' do
 
         it { is_expected.to create_postfix('default') }
         it { is_expected.to accept_osl_firewall_port('smtp') }
+
+        it 'adds the stock retry and proxywrite services missing upstream' do
+          is_expected.to create_postfix('default').with(
+            master_settings: hash_including(
+              'retry' => hash_including('command' => 'error'),
+              'proxywrite' => hash_including('command' => 'proxymap')
+            )
+          )
+        end
       end
 
       context 'with caller-supplied main_settings' do
@@ -151,6 +160,17 @@ describe 'osl_postfix_server' do
           expect(smtps['type']).to eq('inet')         # upstream default survived
           expect(smtps['command']).to eq('smtpd')     # upstream default survived
           expect(smtps['args']).to be_a(Array)        # upstream default survived
+        end
+
+        it 'passes upstream defaults, the caller service and the stock services to the inner resource' do
+          is_expected.to create_postfix('default').with(
+            master_settings: hash_including(
+              'smtps' => hash_including('active' => true, 'order' => 30),
+              'error' => hash_including('command' => 'error'),
+              'retry' => hash_including('active' => true, 'order' => 195, 'type' => 'unix', 'command' => 'error'),
+              'proxywrite' => hash_including('active' => true, 'order' => 155, 'maxproc' => '1', 'command' => 'proxymap')
+            )
+          )
         end
       end
 

@@ -3,6 +3,10 @@ osl-postfix CHANGELOG
 This file is used to list changes made in each version of the
 osl-postfix cookbook.
 
+3.0.2 (2026-11-04)
+------------------
+- Render the stock retry and proxywrite master.cf services
+
 3.0.1 (2026-08-05)
 ------------------
 - Bump postfix to ~> 7.0.3 for the alias database rebuild fix

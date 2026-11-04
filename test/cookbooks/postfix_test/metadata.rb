@@ -8,5 +8,5 @@ source_url       'https://github.com/osuosl-cookbooks/osl-postfix'
 description      'Test fixture for osl-postfix resources'
 version          '0.1.0'
 
-depends          'osl-postfix'
-depends          'certificate'
+depends 'osl-postfix'
+depends 'certificate'
